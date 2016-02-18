@@ -13,9 +13,9 @@
 
 <div class="container">
 <h1><center>All Tags</center></h1>
-<% alltags.forEach(function(tags) { %>
+<% alltags.forEach(function(tag) { %>
 	<ul>
-		<li><a href="/favorites/tags/<%= tags.id %>"><%= tags.tag %></a></li>
+		<li><a href="/favorites/tags/<%= tag.id %>"><%= tag.tag %></a></li>
 	</ul>
 <% }); %>
 

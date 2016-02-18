@@ -12,8 +12,11 @@
 <body>
 
 <div class="container">
-	<h1><center><%= movietags.tag %></center></h1>
+	<h1><center>Tag: <%= movietags.tag %></center></h1>
 	<h3>Tagged Movies:</h3>
+<% favorites.forEach(function(favorite) { %>
+		<p><a href="/movies/<%= favorite.imdbId %>"><%= favorite.title %></a></p>
+<% }); %>
 
 <div class="home"><a href="/">&larr;Home</a></div>
 </div>

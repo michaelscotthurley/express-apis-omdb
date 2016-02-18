@@ -26,8 +26,9 @@ router.post("/", function(req, res) {
 })
 
 router.get("/tags", function(req, res) {
-	db.tag.findAll()
-	.then(function(alltags) {
+	db.tag.findAll({
+		include: [db.favorite]
+    }).then(function(alltags) {
 		res.render('allTags.ejs', {alltags:alltags})
 	});
 });
@@ -39,9 +40,11 @@ router.get("/tags/:id", function(req, res) {
 		},
 		include: [db.favorite]
 		}).then(function(movietags) {
-			res.render('movieTags.ejs', {movietags: movietags})
+			movietags.getFavorites().then(function(favorites) {
+			res.render('movieTags.ejs', {movietags: movietags, favorites: favorites})
 	});
-})
+  })
+});
 
 router.get("/:id/comments", function(req, res) {
 	var id = req.params.id;

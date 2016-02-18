@@ -17,12 +17,17 @@
 	<div class="well">
 		<h3><a href="/movies/<%= film.imdbId %>"><%= film.title %></a><br>
 		<small><%= film.year %></small></h3>
+		<a href="/favorites/<%= film.id %>/comments" class="btn btn-primary">Comments</a>
+		<a href="/favorites/<%= film.id %>/tags" class="btn btn-warning">Add Tag</a>
+
+		<!--This was the old way I was styling buttons as links until I learned about
+		Brian's simpler Bootstrap method 
 		<form method="GET" action="/favorites/<%= film.id %>/comments">
     		<button type="submit" id="comments" class="btn btn-primary">Comments</button>
 		</form>
 		<form method="GET" action="/favorites/<%= film.id %>/tags">
 			<button type="submit" id="tags" class="btn btn-warning">Add Tags</button>
-		</form>
+		</form> -->
 	</div>
 <% }); %>
 <div class="home"><a href="/">&larr;Home</a></div>

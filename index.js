@@ -14,6 +14,17 @@ app.use(ejsLayouts);
 
 var request = require("request");
 
+function log(req,res,next){
+  req.log = function(mes) {
+    console.log(new Date(), req.url, mes);
+  }
+  next();
+}
+
+app.use(log);
+
+
+
 // app.get("/", function(req, res) {
 // 	res.send("Your server works!");
 // })
@@ -25,6 +36,7 @@ app.get("/", function(req, res) {
 
 //Render the search results page
 app.get('/movies', function(req, res) {
+  req.log('loading a movie');
   var query = req.query.q
     request('http://www.omdbapi.com/?s=' + query, function (error, response, body) {
       var data = JSON.parse(body);
