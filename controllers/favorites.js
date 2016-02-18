@@ -17,13 +17,16 @@ router.post("/", function(req, res) {
 	var year = req.body.favyear;
 	var imdb = req.body.favimdb;
 
-	db.favorite.create({
+	db.favorite.findOrCreate({
+	  where: {
 		imdbId: imdb,
 		title: title,
 		year: year
-	}).then
-	res.redirect("/movies/" + imdb);
-})
+	  }
+	}).spread(function(favorite, created) {
+		res.redirect("/favorites");
+  });
+});
 
 router.get("/tags", function(req, res) {
 	db.tag.findAll({
