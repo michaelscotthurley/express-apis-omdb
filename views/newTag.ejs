@@ -11,17 +11,24 @@
 </head>
 <body>
 <div class="container">
-	<h1><%= fav.title %><h1>
-	<h2>Tags:</h2>
+	<h1><%= fav.title %></h1>
 	<div class="well">
 		<h3>Add Tag:</h3>
-		<form action="/favorites/<%=fav.id %>/tags" method="POST">
-		<p>Tag:</p>
-		<input type="text" name="tag" placeholder="Ex: funny" size=
-		"50"/><br>
-		<button type="submit" id="tagsubmit" class="btn btn-warning">Add Tag</button>
-		</form>
+		<div class="form-group">
+			<form action="/favorites/<%=fav.id %>/tags" method="POST">
+			<label>Tag:</label>
+			<input type="text" name="tag" placeholder="Ex: funny" size=
+			"50"/>
+			<button type="submit" id="tagsubmit" class="btn btn-warning">Add Tag</button>
+			</form>
+		</div>
 	</div>
+	<h3>Currently Tagged With:</h3>
+	<% tags.forEach(function(tag) { %>
+	<div class="well">
+		<p><a href="/favorites/tags/<%= tag.id %>"><%= tag.tag %></a></p>
+	</div>
+	<% }); %> 
 <div class="home"><a href="/">&larr;Home</a></div>
 </div>
 </body>

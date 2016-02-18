@@ -70,9 +70,16 @@ router.post("/:id/comments", function(req, res) {
 
 router.get("/:id/tags", function(req, res) {
 	var id = req.params.id;
-	db.favorite.findById(id).then(function(fav) {
-		res.render('newTag.ejs', {fav:fav});
+	db.favorite.findOne({
+		where: {
+			id: id
+		},
+		include: [db.tag]
+	}).then(function(fav) {
+		fav.getTags().then(function(tags) {
+		res.render('newTag.ejs', {fav:fav, tags:tags});
 	})
+  })
 })
 
 router.post("/:id/tags", function(req, res) {
